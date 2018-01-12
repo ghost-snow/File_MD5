@@ -1,5 +1,5 @@
 #coding=utf-8
-#eg.:difflib-test.py file1 file2 report.html
+#eg.:FileCMP.py file1 file2
 
 import sys
 import difflib
