@@ -17,6 +17,6 @@ a9e4bab38ead529802f670552e71773d  2018-01-10 23:17:58  0.0045MB /Users/xx/Pychar
 ===========文件夹根目录： /Users/XX/PycharmProjects/TEST 
 
 ===========本次计算结果生成时间：2018-01-10 23:19:04.548448
-# difflib-test.py
+# FileCMP.py
 比较两个文本文件差异化内容，生成对比报告report.html
-eg.: difflib-test.py file1 file2
+eg.: FileCMP.py file1 file2
