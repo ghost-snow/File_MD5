@@ -1,18 +1,13 @@
-#encoding = utf-8
-#!/usr/bin/env python
-# 程序功能：能够生成指定文件夹、文件的散列值（md5），并将结果保存在
-# 一个文本文档中，同时保存文件大小、修改时间。
-# 例如：
-# 32f4ddcfcfe2ac8f02a1d5b6dfdcb886   1231MB  2017.10.10 ／Web/admin/index.php
+#coding=utf-8
 
 import hashlib
 import os
 import time
 import datetime
 import sys
-import getopt
+#import getopt
 import argparse
-
+import difflib
 
 #手动设置递归深度，防止超出列表默认递归值
 sys.setrecursionlimit(1000000)
@@ -61,12 +56,17 @@ def IterateFiles(directory):
              f.write('\n' + str(Md5(result[i])) + '  ' + str(get_FileModifyTime(result[i])) + "  "
                        + str(get_FileSize(result[i])) + 'MB ' + str(get_File_Path(result[i])) +'\n' )
     return result
+#输出结果文件
+def OutFiles(outfile):
+    with open('File_MD5.txt','r') as old:
+        for line in old.readlines():
+            with open(args.outfile,'a') as newfile:
+                newfile.write(line)
+#
+#比较两次计算结果文件差异
+def FileCMP(file1,file2):
+    pass
 
-# def OutFiles(outfile):
-#     with open('File_MD5.txt','r') as old:
-#         for line in old.readlines():
-#             with open(args.outfile,'a') as newfile:
-#                 newfile.write(line)
 if __name__ == '__main__':
     datetime = datetime.datetime.now()
     # Ver 0.9
@@ -92,36 +92,27 @@ if __name__ == '__main__':
     help = ('\n'r"[*] 程序功能：通过-d参数遍历并生成指定文件夹中文件的散列值（md5），并将结果保存在"
             '\n'r"[*] 一个文本文档中，同时保存文件大小、修改时间。"
             '\n'r"[*] NOTE: Please run this program under the Python3.X"
-            '\n'r"[*] For example: 'python CheckFile.py -d D:\TEST\ONE'"
+            '\n'r"[*] For example: 'python CheckFile.py -d D:\TEST\ONE -o report.txt'"
             '\n'r"[*] Result: 32f4ddcfcfe2ac8f02a1d5b6dfdcb886  1231MB  2017.10.10  /Web/admin/index.php")
     parser = argparse.ArgumentParser(help)
     parser.add_argument('-v','--version', help='show the Version',action ='store_true')
-    parser.add_argument('-d','--dirs', help='list the dirs',action ='store')
-    # parser.add_argument('-o', '--outfile', help='', action='store')
+    parser.add_argument('-d','--dirs', help='指定文件夹路径（eg."/usr/local/share"）',action ='store')
+    parser.add_argument('-o', '--outfile', help='指定计算结果输出文件(eg."report.txt")', action='store')
+
     args = parser.parse_args()
 
     if args.version:
-        print('The version is 1.0')
+        ver = 'The version is 1.1'
+        print(ver)
 
     if args.dirs:
         IterateFiles(args.dirs)
         with open('File_MD5.txt', 'a') as f:
             f.write('\n''===========文件夹根目录： ' + str(os.path.abspath(args.dirs)) +
                 '  本次计算结果生成时间：' + str(datetime) + '=============''\n')
-            print('计算已完成: '+ 'File_MD5.txt' + '生成时间：' + str(datetime))
+            print('计算已完成: '+ args.outfile + ' 生成时间：' + str(datetime))
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    if args.outfile:
+        OutFiles(outfile=args.outfile)
+        os.remove('File_MD5.txt')
+        
