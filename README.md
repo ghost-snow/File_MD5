@@ -1,4 +1,4 @@
-# File_MD5
+# CheckFile.py
 批量计算指定文件夹下所有文件的MD5值、文件大小、修改时间、绝对路径等信息并保存为File_MD5.txt
 
 用法：
@@ -17,3 +17,6 @@ a9e4bab38ead529802f670552e71773d  2018-01-10 23:17:58  0.0045MB /Users/xx/Pychar
 ===========文件夹根目录： /Users/XX/PycharmProjects/TEST 
 
 ===========本次计算结果生成时间：2018-01-10 23:19:04.548448
+# difflib-test.py
+比较两个文本文件差异化内容，生成对比报告report.html
+eg.: difflib-test.py file1 file2
