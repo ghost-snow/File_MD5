@@ -4,7 +4,7 @@
 用法：
 CheckFile.py －h (查看帮助)
 
-CheckFile.py -d (DIRS)
+CheckFile.py -d (DIRS) -o report.txt
 
 示例：File_MD5.txt
 
